@@ -1,9 +1,9 @@
 version: '3'
 services:
   backend:
-    build: ./barber-backend
-    environment:
-      - PORT=9000 
+    image: barber-backend:latest
+    ports:
+      - 9000:9000
     deploy:
       replicas: 2
     volumes:
@@ -13,11 +13,18 @@ services:
     
 
   frontend:
-    build: ./barber-frontend
+    image: barber-frontend:latest
     ports:
-      - 443:80
+      - 80:3030
     networks:
       - loadbalancing
+    depends_on:
+      - backend
 
 networks:
   loadbalancing:
+    driver: overlay
+
+volumes:
+  barber-db:
+    driver: local
