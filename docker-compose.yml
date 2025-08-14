@@ -1,1 +1,23 @@
-lorum
+version: '3'
+services:
+  backend:
+    build: ./barber-backend
+    environment:
+      - PORT=9000 
+    deploy:
+      replicas: 2
+    volumes:
+      - barber-db:/data
+    networks:
+      - loadbalancing
+    
+
+  frontend:
+    build: ./barber-frontend
+    ports:
+      - 443:80
+    networks:
+      - loadbalancing
+
+networks:
+  loadbalancing:
