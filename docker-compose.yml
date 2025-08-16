@@ -2,28 +2,25 @@ version: '3'
 services:
   backend:
     image: barber-backend:latest
-    ports:
-      - 9000:9000
     deploy:
       replicas: 2
     volumes:
       - barber-db:/data
     networks:
-      - loadbalancing
+      - barber_loadbalancing
     
 
   frontend:
     image: barber-frontend:latest
     ports:
-      - 80:3030
+      - 80:80
     networks:
-      - loadbalancing
+      - barber_loadbalancing
     depends_on:
-      - backend
+      - backende
 
 networks:
-  loadbalancing:
-    driver: overlay
+  barber_loadbalancing:
 
 volumes:
   barber-db:
