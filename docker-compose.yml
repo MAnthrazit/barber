@@ -25,3 +25,4 @@ networks:
 volumes:
   barber-db:
     driver: local
+    name: barber-db
