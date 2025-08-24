@@ -1,4 +1,3 @@
-version: '3'
 services:
   backend:
     image: barber-backend:latest
@@ -9,7 +8,6 @@ services:
     networks:
       - barber_loadbalancing
     
-
   frontend:
     image: barber-frontend:latest
     ports:
@@ -17,7 +15,20 @@ services:
     networks:
       - barber_loadbalancing
     depends_on:
-      - backende
+      - backend
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_HOST='%'
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=barber
+    volumes:
+      - mysql-db:/var/lib/mysql
+    ports:
+      - 3306:3306
+    networks:
+      - barber_loadbalancing
 
 networks:
   barber_loadbalancing:
@@ -26,3 +37,6 @@ volumes:
   barber-db:
     driver: local
     name: barber-db
+  mysql-db:
+    driver: local
+    name: mysql-db
