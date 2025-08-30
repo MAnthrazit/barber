@@ -15,6 +15,13 @@ services:
       - 443:443
     networks:
       - barber_loadbalancing
+    environment:
+      - DOMAIN=peterbarber.sytes.net
+    secrets:
+      - certbot_email
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+    restart: always
     depends_on:
       - backend
 
@@ -41,3 +48,7 @@ volumes:
   mysql-db:
     driver: local
     name: mysql-db
+
+secrets:
+  certbot_email:
+    file: ./certbot/certbot_email
