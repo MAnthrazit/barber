@@ -5,3 +5,4 @@
 [submodule "barber-backend"]
 	path = barber-backend
 	url = git@github.com:MAnthrazit/barber-backend.git
+	branch = dev
