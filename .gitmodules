@@ -1,6 +1,7 @@
 [submodule "barber-frontend"]
 	path = barber-frontend
 	url = git@github.com:MAnthrazit/barber-frontend.git
+	branch = dev
 [submodule "barber-backend"]
 	path = barber-backend
 	url = git@github.com:MAnthrazit/barber-backend.git
